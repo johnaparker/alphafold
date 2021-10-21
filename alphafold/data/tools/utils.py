@@ -24,7 +24,7 @@ from absl import logging
 @contextlib.contextmanager
 def tmpdir_manager(base_dir: Optional[str] = None):
   """Context manager that deletes a temporary directory on exit."""
-  tmpdir = tempfile.mkdtemp(dir=base_dir)
+  tmpdir = tempfile.mkdtemp() # IGNORE base_dir; this avoids using /tmp on Midway, will instead use $TMPDIR
   try:
     yield tmpdir
   finally:
