@@ -74,7 +74,7 @@ class Jackhmmer:
       logging.error('Could not find Jackhmmer database %s', database_path)
       raise ValueError(f'Could not find Jackhmmer database {database_path}')
 
-    self.n_cpu = n_cpu
+    self.n_cpu = n_cpu if n_cpu is not None else utils.cpu_count()
     self.n_iter = n_iter
     self.e_value = e_value
     self.z_value = z_value

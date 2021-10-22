@@ -35,7 +35,7 @@ class HHBlits:
                *,
                binary_path: str,
                databases: Sequence[str],
-               n_cpu: int = 4,
+               n_cpu: int = None,
                n_iter: int = 3,
                e_value: float = 0.001,
                maxseq: int = 1_000_000,
@@ -82,7 +82,7 @@ class HHBlits:
         logging.error('Could not find HHBlits database %s', database_path)
         raise ValueError(f'Could not find HHBlits database {database_path}')
 
-    self.n_cpu = n_cpu
+    self.n_cpu = n_cpu if n_cpu is not None else utils.cpu_count()
     self.n_iter = n_iter
     self.e_value = e_value
     self.maxseq = maxseq

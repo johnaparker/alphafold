@@ -19,6 +19,7 @@ import time
 from typing import Optional
 
 from absl import logging
+import os
 
 
 @contextlib.contextmanager
@@ -38,3 +39,8 @@ def timing(msg: str):
   yield
   toc = time.time()
   logging.info('Finished %s in %.3f seconds', msg, toc - tic)
+
+
+def cpu_count(default: int = 1):
+    """get the number of available CPUs (SLURM compatible)"""
+    return int(os.environ.get('SLURM_NPROCS', default))

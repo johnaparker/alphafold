@@ -57,10 +57,11 @@ class Hmmsearch(object):
       with open(hmm_input_path, 'w') as f:
         f.write(hmm)
 
+     n_cpu = utils.cpu_count()
       cmd = [
           self.binary_path,
           '--noali',  # Don't include the alignment in stdout.
-          '--cpu', '8'
+          '--cpu', str(n_cpu)
       ]
       # If adding flags, we have to do so before the output and input:
       if self.flags:
